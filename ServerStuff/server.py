@@ -2,6 +2,7 @@ import json
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import RedirectResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.gzip import GZipMiddleware
 from traceback import format_exc
 from classes.connection_manager import ConnectionManager
 from classes.player import Player
@@ -18,6 +19,7 @@ initialize()
 random_characters = get_data("random_characters")
 current_banlist = get_data("current_banlist")
 en_current_banlist = get_data("en_current_banlist")
+en_unreleased = get_data("en_unreleased")
 unreleased = get_data("unreleased")
 card_data = get_data("card_data")
 bloom_levels = get_data("bloom_levels")
@@ -29,6 +31,7 @@ initialize_manager(ConnectionManager())
 
 app = FastAPI()
 app.mount("/game", StaticFiles(directory="Holodelta_web"), name="game")
+app.add_middleware(GZipMiddleware, minimum_size=1000, compresslevel=7)
 
 @app.get("/")
 def index():
@@ -60,7 +63,7 @@ async def websocket_endpoint(websocket: WebSocket):
     await manager.connect(websocket)
     try:
         player = Player(websocket)
-        await player.tell("Server","Player Info",{"id":player.id, "name":player.name,"current":current_banlist,"en_current":en_current_banlist,"unreleased":unreleased,"server_id":identifier})
+        await player.tell("Server","Player Info",{"id":player.id, "name":player.name,"current":current_banlist,"en_current":en_current_banlist,"en_unreleased":en_unreleased,"unreleased":unreleased,"server_id":identifier})
         await update_numbers_all()
         while True:
             json_data = await websocket.receive_bytes()
