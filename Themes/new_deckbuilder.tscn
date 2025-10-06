@@ -1,0 +1,515 @@
+[gd_scene load_steps=12 format=3 uid="uid://dibvusxywbw75"]
+
+[ext_resource type="Texture2D" uid="uid://ngxbbonnmuab" path="res://CyberAssets/DeckBuilder/Deck_Builder_BG.png" id="1_yru5c"]
+[ext_resource type="Texture2D" uid="uid://cx76tmf8royup" path="res://CyberAssets/Game Side Menu/Side Menu.png" id="2_gjgpy"]
+[ext_resource type="PackedScene" uid="uid://chrab4uqxsh2s" path="res://Scenes/info_panel.tscn" id="3_p50ic"]
+[ext_resource type="Theme" uid="uid://c2xsywtxro80x" path="res://Themes/button.tres" id="4_l2lfm"]
+[ext_resource type="StyleBox" uid="uid://4q0b5bd3pne2" path="res://Themes/deckbuilder_tab.tres" id="5_sjmv4"]
+[ext_resource type="StyleBox" uid="uid://bvio75ectnj1p" path="res://Themes/deckbuilder_box.tres" id="6_fo0jl"]
+[ext_resource type="PackedScene" uid="uid://gfca1xt2vdra" path="res://Scenes/sleeve_select.tscn" id="7_csc84"]
+[ext_resource type="Texture2D" uid="uid://bnsmsduvikadg" path="res://holoBack.png" id="8_h6iir"]
+[ext_resource type="Texture2D" uid="uid://bcans1dkc8eyo" path="res://cheerBack.png" id="9_o6l4x"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ippt"]
+texture = ExtResource("1_yru5c")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j0oem"]
+texture = ExtResource("2_gjgpy")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(83, 0, 293, 722)
+
+[node name="SideMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_7ippt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SideMenu" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_j0oem")
+
+[node name="InfoMargins" parent="HBoxContainer/SideMenu" instance=ExtResource("3_p50ic")]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="CenterVBox" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="YourStuff" type="TabContainer" parent="HBoxContainer/CenterVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("4_l2lfm")
+current_tab = 0
+
+[node name="TAB_DECK" type="PanelContainer" parent="HBoxContainer/CenterVBox/YourStuff"]
+layout_mode = 2
+theme = ExtResource("4_l2lfm")
+theme_override_styles/panel = ExtResource("5_sjmv4")
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CenterVBox/YourStuff/TAB_DECK"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterVBox/YourStuff/TAB_DECK/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MainCount" type="Label" parent="HBoxContainer/CenterVBox/YourStuff/TAB_DECK/MarginContainer/VBoxContainer"]
+auto_translate_mode = 2
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 15
+text = "0/50"
+
+[node name="MainDeck" type="ScrollContainer" parent="HBoxContainer/CenterVBox/YourStuff/TAB_DECK/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MainDeckPanelContainer" type="PanelContainer" parent="HBoxContainer/CenterVBox/YourStuff/TAB_DECK/MarginContainer/VBoxContainer/MainDeck"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("6_fo0jl")
+
+[node name="CheerCount" type="Label" parent="HBoxContainer/CenterVBox/YourStuff/TAB_DECK/MarginContainer/VBoxContainer"]
+auto_translate_mode = 2
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 15
+text = "0/20"
+
+[node name="CheerDeck" type="ScrollContainer" parent="HBoxContainer/CenterVBox/YourStuff/TAB_DECK/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CheerDeckPanelContainer" type="PanelContainer" parent="HBoxContainer/CenterVBox/YourStuff/TAB_DECK/MarginContainer/VBoxContainer/CheerDeck"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("6_fo0jl")
+
+[node name="TAB_ANALYTICS" type="PanelContainer" parent="HBoxContainer/CenterVBox/YourStuff"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_l2lfm")
+theme_override_styles/panel = ExtResource("5_sjmv4")
+metadata/_tab_index = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/CenterVBox/YourStuff/TAB_ANALYTICS"]
+layout_mode = 2
+
+[node name="Stats" type="Label" parent="HBoxContainer/CenterVBox/YourStuff/TAB_ANALYTICS/ScrollContainer"]
+auto_translate_mode = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TAB_SLEEVES" type="Control" parent="HBoxContainer/CenterVBox/YourStuff"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_l2lfm")
+metadata/_tab_index = 2
+
+[node name="Main" parent="HBoxContainer/CenterVBox/YourStuff/TAB_SLEEVES" instance=ExtResource("7_csc84")]
+visible = false
+position = Vector2(50, 50)
+scale = Vector2(0.5, 0.5)
+default_sleeve = ExtResource("8_h6iir")
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterVBox/YourStuff/TAB_SLEEVES/Main"]
+offset_top = -60.0
+offset_right = 313.0
+offset_bottom = 9.0
+theme = ExtResource("4_l2lfm")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = "MAIN_DECK"
+horizontal_alignment = 1
+
+[node name="Cheer" parent="HBoxContainer/CenterVBox/YourStuff/TAB_SLEEVES" instance=ExtResource("7_csc84")]
+visible = false
+position = Vector2(225, 50)
+scale = Vector2(0.5, 0.5)
+default_sleeve = ExtResource("9_o6l4x")
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterVBox/YourStuff/TAB_SLEEVES/Cheer"]
+offset_top = -60.0
+offset_right = 313.0
+offset_bottom = 9.0
+theme = ExtResource("4_l2lfm")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = "CHEER"
+horizontal_alignment = 1
+
+[node name="Oshi" parent="HBoxContainer/CenterVBox/YourStuff/TAB_SLEEVES" instance=ExtResource("7_csc84")]
+visible = false
+position = Vector2(400, 50)
+scale = Vector2(0.5, 0.5)
+default_sleeve = ExtResource("9_o6l4x")
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterVBox/YourStuff/TAB_SLEEVES/Oshi"]
+offset_top = -60.0
+offset_right = 313.0
+offset_bottom = 9.0
+theme = ExtResource("4_l2lfm")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = "OSHI"
+horizontal_alignment = 1
+
+[node name="ButtonHBox" type="HBoxContainer" parent="HBoxContainer/CenterVBox"]
+layout_mode = 2
+
+[node name="LoadDeck" type="Button" parent="HBoxContainer/CenterVBox/ButtonHBox"]
+layout_mode = 2
+theme = ExtResource("4_l2lfm")
+theme_override_font_sizes/font_size = 20
+text = "LOAD"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="SaveDeck" type="Button" parent="HBoxContainer/CenterVBox/ButtonHBox"]
+layout_mode = 2
+theme = ExtResource("4_l2lfm")
+theme_override_font_sizes/font_size = 20
+text = "DECK_SAVE"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="DeckName" type="LineEdit" parent="HBoxContainer/CenterVBox/ButtonHBox"]
+layout_mode = 2
+theme = ExtResource("4_l2lfm")
+theme_override_font_sizes/font_size = 15
+placeholder_text = "DEFAULT_DECK_NAME"
+
+[node name="MainMenu" type="Button" parent="HBoxContainer/CenterVBox/ButtonHBox"]
+layout_mode = 2
+theme = ExtResource("4_l2lfm")
+theme_override_font_sizes/font_size = 10
+text = "MENU"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="Clear" type="Button" parent="HBoxContainer/CenterVBox/ButtonHBox"]
+layout_mode = 2
+theme = ExtResource("4_l2lfm")
+theme_override_font_sizes/font_size = 10
+text = "DECK_CLEAR"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="BanlistChoice" type="OptionButton" parent="HBoxContainer/CenterVBox/ButtonHBox"]
+layout_mode = 2
+theme = ExtResource("4_l2lfm")
+selected = 1
+item_count = 4
+popup/item_0/text = "LOBBY_BANLIST_NONE"
+popup/item_1/text = "LOBBY_BANLIST_CURRENT"
+popup/item_1/id = 1
+popup/item_2/text = "LOBBY_BANLIST_CURRENT_EN"
+popup/item_2/id = 2
+popup/item_3/text = "LOBBY_BANLIST_UNRELEASED"
+popup/item_3/id = 3
+
+[node name="PossibleCards" type="TabContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_l2lfm")
+current_tab = 0
+
+[node name="TAB_OSHI" type="PanelContainer" parent="HBoxContainer/PossibleCards"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("5_sjmv4")
+metadata/_tab_index = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/PossibleCards/TAB_OSHI"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/PossibleCards/TAB_OSHI/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)
+
+[node name="NameSelect" type="MenuButton" parent="HBoxContainer/PossibleCards/TAB_OSHI"]
+layout_mode = 2
+text = "NAME"
+flat = false
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="ColorSelect" type="MenuButton" parent="HBoxContainer/PossibleCards/TAB_OSHI"]
+layout_mode = 2
+text = "COLOR"
+flat = false
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="ClearFilters" type="Button" parent="HBoxContainer/PossibleCards/TAB_OSHI"]
+layout_mode = 2
+text = "FILTER_CLEAR"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="Search" type="LineEdit" parent="HBoxContainer/PossibleCards/TAB_OSHI"]
+layout_mode = 2
+placeholder_text = "SEARCH"
+
+[node name="TAB_HOLOMEM" type="Control" parent="HBoxContainer/PossibleCards"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/PossibleCards/TAB_HOLOMEM"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 117.0
+offset_right = -2.0
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/PossibleCards/TAB_HOLOMEM/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)
+
+[node name="NameSelect" type="MenuButton" parent="HBoxContainer/PossibleCards/TAB_HOLOMEM"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 54.0
+offset_right = 177.0
+offset_bottom = 67.0
+text = "NAME"
+flat = false
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="ColorSelect" type="MenuButton" parent="HBoxContainer/PossibleCards/TAB_HOLOMEM"]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 54.0
+offset_right = 368.0
+offset_bottom = 67.0
+text = "COLOR"
+flat = false
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="LevelSelect" type="MenuButton" parent="HBoxContainer/PossibleCards/TAB_HOLOMEM"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 89.0
+offset_right = 101.0
+offset_bottom = 102.0
+text = "LEVEL"
+flat = false
+text_overrun_behavior = 3
+clip_text = true
+item_count = 5
+popup/item_0/text = "LEVEL_ANY"
+popup/item_1/text = "LEVEL_DEBUT"
+popup/item_1/id = 1
+popup/item_2/text = "LEVEL_1"
+popup/item_2/id = 2
+popup/item_3/text = "LEVEL_2"
+popup/item_3/id = 3
+popup/item_4/text = "LEVEL_SPOT"
+popup/item_4/id = 4
+
+[node name="TagSelect" type="MenuButton" parent="HBoxContainer/PossibleCards/TAB_HOLOMEM"]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 90.0
+offset_right = 254.0
+offset_bottom = 103.0
+text = "TAG_PLURAL"
+flat = false
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="BuzzSelect" type="CheckBox" parent="HBoxContainer/PossibleCards/TAB_HOLOMEM"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.02
+anchor_bottom = 0.012
+offset_left = 123.0
+offset_top = 87.0
+offset_right = 170.16
+offset_bottom = 94.732
+text = "BUZZ"
+
+[node name="ClearFilters" type="Button" parent="HBoxContainer/PossibleCards/TAB_HOLOMEM"]
+layout_mode = 0
+offset_left = 277.0
+offset_top = 90.0
+offset_right = 369.0
+offset_bottom = 103.0
+text = "FILTER_CLEAR"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="Search" type="LineEdit" parent="HBoxContainer/PossibleCards/TAB_HOLOMEM"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 378.0
+offset_bottom = 40.0
+placeholder_text = "SEARCH"
+
+[node name="TAB_SUPPORT" type="Control" parent="HBoxContainer/PossibleCards"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/PossibleCards/TAB_SUPPORT"]
+layout_mode = 2
+offset_top = 86.0
+offset_right = 392.0
+offset_bottom = 689.0
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/PossibleCards/TAB_SUPPORT/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)
+
+[node name="TypeSelect" type="MenuButton" parent="HBoxContainer/PossibleCards/TAB_SUPPORT"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 53.0
+offset_right = 153.0
+offset_bottom = 66.0
+text = "SUPPORT_TYPE"
+flat = false
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="LimitedSelect" type="CheckBox" parent="HBoxContainer/PossibleCards/TAB_SUPPORT"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.02
+anchor_bottom = 0.012
+offset_left = 178.0
+offset_top = 51.0
+offset_right = 245.16
+offset_bottom = 58.732
+text = "SUPPORT_LIMITED"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="ClearFilters" type="Button" parent="HBoxContainer/PossibleCards/TAB_SUPPORT"]
+layout_mode = 0
+offset_left = 278.0
+offset_top = 53.0
+offset_right = 370.0
+offset_bottom = 66.0
+text = "FILTER_CLEAR"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="Search" type="LineEdit" parent="HBoxContainer/PossibleCards/TAB_SUPPORT"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 378.0
+offset_bottom = 40.0
+placeholder_text = "SEARCH"
+
+[node name="TAB_CHEER" type="Control" parent="HBoxContainer/PossibleCards"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/PossibleCards/TAB_CHEER"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 47.0
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/PossibleCards/TAB_CHEER/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)
+
+[node name="Multiple" type="Label" parent="HBoxContainer/PossibleCards/TAB_CHEER"]
+auto_translate_mode = 2
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 61.0
+offset_bottom = 35.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 25
+text = "1x"
+
+[node name="OneMultiple" type="Button" parent="HBoxContainer/PossibleCards/TAB_CHEER"]
+auto_translate_mode = 2
+layout_mode = 0
+offset_left = 98.0
+offset_top = 14.0
+offset_right = 138.0
+offset_bottom = 27.0
+text = "1"
+
+[node name="FiveMultiple" type="Button" parent="HBoxContainer/PossibleCards/TAB_CHEER"]
+auto_translate_mode = 2
+layout_mode = 0
+offset_left = 170.0
+offset_top = 14.0
+offset_right = 210.0
+offset_bottom = 27.0
+text = "5
+"
+
+[node name="TenMultiple" type="Button" parent="HBoxContainer/PossibleCards/TAB_CHEER"]
+auto_translate_mode = 2
+layout_mode = 0
+offset_left = 245.0
+offset_top = 14.0
+offset_right = 285.0
+offset_bottom = 27.0
+text = "10"
+
+[node name="TwentyMultiple" type="Button" parent="HBoxContainer/PossibleCards/TAB_CHEER"]
+auto_translate_mode = 2
+layout_mode = 0
+offset_left = 319.0
+offset_top = 14.0
+offset_right = 359.0
+offset_bottom = 27.0
+text = "20"

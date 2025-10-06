@@ -6,32 +6,52 @@
 [ext_resource type="PackedScene" uid="uid://chrab4uqxsh2s" path="res://Scenes/info_panel.tscn" id="4_aw7bg"]
 [ext_resource type="PackedScene" uid="uid://cvqdjg5xohy5a" path="res://Scenes/deck_list.tscn" id="4_lmglq"]
 [ext_resource type="PackedScene" uid="uid://gfca1xt2vdra" path="res://Scenes/sleeve_select.tscn" id="5_0bh18"]
-[ext_resource type="Texture2D" uid="uid://ngxbbonnmuab" path="res://CyberAssets/DeckBuilder/Deck_Builder_BG.png" id="6_t38qv"]
 [ext_resource type="Texture2D" uid="uid://bnsmsduvikadg" path="res://holoBack.png" id="6_to43o"]
 [ext_resource type="Texture2D" uid="uid://bcans1dkc8eyo" path="res://cheerBack.png" id="7_kh04n"]
 [ext_resource type="AudioStream" uid="uid://dx0hyqv3whb28" path="res://ChikuTaku The Game VGM Menu Select Watson Amelia WUNDER RiKU ✨ チクタク オリジナル曲.mp3" id="10_ncvki"]
 [ext_resource type="Script" path="res://addons/HTTPManager/classes/HTTPManager.gd" id="11_h6gkd"]
 
-[node name="DeckCreation" type="Node2D"]
-script = ExtResource("1_vhmc0")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_spxsh"]
+texture = ExtResource("2_dcm3l")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(83, 0, 293, 722)
 
-[node name="DeckBuilderBg" type="Sprite2D" parent="."]
-position = Vector2(587, 347)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("6_t38qv")
+[node name="DeckCreation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vhmc0")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="SideMenu" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(-84, 0)
+[node name="DeckBuilderBg" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 245.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+
+[node name="SideMenu" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 0.08
+anchor_bottom = 1.0
+offset_right = 196.6
+grow_vertical = 2
 scale = Vector2(1.01172, 0.997)
-texture = ExtResource("2_dcm3l")
-centered = false
+theme_override_styles/panel = SubResource("StyleBoxTexture_spxsh")
 
 [node name="InfoMargins" parent="CanvasLayer" instance=ExtResource("4_aw7bg")]
 unique_name_in_owner = true
-offset_right = 295.0
-offset_bottom = 685.0
+offset_left = -2.0
+offset_top = 3.0
+offset_right = 293.0
+offset_bottom = 688.0
 
 [node name="PossibleCards" type="TabContainer" parent="CanvasLayer"]
 offset_left = 886.0
@@ -39,9 +59,10 @@ offset_top = 2.0
 offset_right = 1278.0
 offset_bottom = 718.0
 theme = ExtResource("3_da1xd")
-current_tab = 0
+current_tab = 1
 
 [node name="TAB_OSHI" type="Control" parent="CanvasLayer/PossibleCards"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -98,11 +119,11 @@ offset_bottom = 40.0
 placeholder_text = "SEARCH"
 
 [node name="TAB_HOLOMEM" type="Control" parent="CanvasLayer/PossibleCards"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/PossibleCards/TAB_HOLOMEM"]
+visible = false
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -111,6 +132,7 @@ offset_top = 117.0
 offset_right = -2.0
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/PossibleCards/TAB_HOLOMEM/ScrollContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

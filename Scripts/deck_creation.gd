@@ -8,7 +8,7 @@
 #Analytics has some stats of the deck
 #Sleeves has 3 SleeveSelects for main deck, cheer deck, and oshi
 
-extends Node2D
+extends Control
 
 #region Variables
 
